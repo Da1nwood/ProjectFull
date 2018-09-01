@@ -13,11 +13,14 @@ import java.net.*;
 class Connection_to_http extends Thread {
     private String name_coin;
     private String url;
+    protected static WhereSet whereSet= null;
 
     Connection_to_http(String name_coin) {
         this.name_coin = name_coin;
         this.url = "https://min-api.cryptocompare.com/data/price?fsym="+name_coin+"&tsyms=USD";
     }
+
+
 
     public void run() {
         HttpURLConnection connection = null;
@@ -39,7 +42,7 @@ class Connection_to_http extends Thread {
                         JsonParser jsonParser = new JsonParser();
                         Object obj = jsonParser.parse(line);
                         JsonObject jsonObject = (JsonObject) obj;
-                        Connect_To_Data.set_info(jsonObject,name_coin);
+                        whereSet.get_info_for(jsonObject,name_coin);
 
         }
 
@@ -88,6 +91,7 @@ class Connection_to_http extends Thread {
             }
 
         }
+
 
     }
 
