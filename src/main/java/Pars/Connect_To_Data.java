@@ -9,9 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
  class Connect_To_Data {
-     private static final String UserName = "root";
-     private static final String password = "1111";
-     private static final String connectionUrl = "jdbc:mysql://localhost:3306/crypto?verifyServerCertificate=false&useSSL=true&serverTimezone=UTC";
+     private static final String UserName = Properties.getProperty("UserName");
+     private static final String password = Properties.getProperty("password");
+     private static final String connectionUrl = Properties.getProperty("connectionUrl");
 
      static void mysql_connection(Crypto_info crypto_info) throws Exception {
          Class.forName("com.mysql.cj.jdbc.Driver");
