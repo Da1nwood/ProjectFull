@@ -1,7 +1,6 @@
 package servlets;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-@WebServlet("/StartServlet")
+@WebServlet(value = "/StartServlet" , asyncSupported = true)
 public class Serv extends HttpServlet{
 public ArrayList price = new ArrayList();
 public ArrayList TimeAdd = new ArrayList();
@@ -27,6 +26,7 @@ private static final String connectionUrl = "jdbc:mysql://localhost:3306/crypto?
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         try {
+
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(connectionUrl, UserName, password);
             String query = "SELECT * FROM crypto.btc";
@@ -43,6 +43,7 @@ private static final String connectionUrl = "jdbc:mysql://localhost:3306/crypto?
 
         request.setAttribute("price", price);
         request.setAttribute("TimeAdd", TimeAdd);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/Etherium.jsp");
         dispatcher.forward(request,response);
     }
