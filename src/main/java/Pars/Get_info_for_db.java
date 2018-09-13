@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 
 import static Pars.Connect_To_Data.mysql_connection;
 
-public class Get_info_for_db implements WhereSet {
+public class Get_info_for_db implements IWhereSet {
     @Override
     public void get_info_for(JsonObject jsonObject, String name_coin) throws Exception {
         long timestamp = System.currentTimeMillis() / 1000;

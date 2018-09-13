@@ -9,21 +9,17 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
  class Connect_To_Data {
-     private static final String UserName = Properties.getProperty("UserName");
-     private static final String password = Properties.getProperty("password");
-     private static final String connectionUrl = Properties.getProperty("connectionUrl");
-
      static void mysql_connection(Crypto_info crypto_info) throws Exception {
-         Class.forName("com.mysql.cj.jdbc.Driver");
-         try (Connection connection_to_data = DriverManager.getConnection(connectionUrl, UserName, password)) {
-             try {
+         MySQLConnector mySQLConnector = new MySQLConnector();
+         try {
+             try (Connection connection = mySQLConnector.getConnection()) {
                  {
                      String name_coin = crypto_info.getName().toLowerCase();
                      String price = crypto_info.getPrice();
                      String TimeAdd = crypto_info.getTimestamp();
                      System.out.println(price);
                      String query = "INSERT INTO crypto." + name_coin + "(price, TimeAdd) VALUES (?,?)";
-                     PreparedStatement stmt = connection_to_data.prepareStatement(query);
+                     PreparedStatement stmt = connection.prepareStatement(query);
                      stmt.setString(1, price);
                      stmt.setString(2, TimeAdd);
                      stmt.executeUpdate();
@@ -40,10 +36,13 @@ import java.sql.SQLException;
                      FatalityExceptions.WrongNameOrPassword();
                  }
 
-             } finally {
-                 connection_to_data.close();
+
+             } catch (Exception e) {
+                 e.printStackTrace();
              }
          }
-
+         catch (Exception e){
+             e.printStackTrace();
+         }
      }
  }

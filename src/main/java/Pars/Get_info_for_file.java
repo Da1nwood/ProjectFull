@@ -5,17 +5,18 @@ import com.google.gson.JsonObject;
 
 import java.io.*;
 
-public class Get_info_for_file implements WhereSet {
+public class Get_info_for_file implements IWhereSet {
     public static PrintWriter printWriter = null;
 
 
     @Override
     public void get_info_for(JsonObject jsonObject, String name_coin) throws Exception {
-        String name_file = name_coin + ".txt";
-        File file = new File(name_file);
-        if (!(file.exists())) {
-            file.createNewFile();
-        }
+        synchronized (this) {
+            String name_file = name_coin + ".txt";
+            File file = new File(name_file);
+            if (!(file.exists())) {
+                file.createNewFile();
+            }
             try {
                 printWriter = new PrintWriter(new FileOutputStream(name_file, true));
                 long timestamp = System.currentTimeMillis() / 1000;
@@ -31,4 +32,5 @@ public class Get_info_for_file implements WhereSet {
             }
         }
     }
+}
 

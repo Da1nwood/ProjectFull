@@ -29,9 +29,8 @@ public class Get_connection extends Thread{
                 Socket socket = null;
                 ServerSocket s = new ServerSocket(port_name);
                 try {
-
                     socket = s.accept();
-                    while (socket.isConnected()) {
+                    while (true) {
                         try {
                             String query = " SELECT COUNT(*) from crypto." + name_coin;
                             Statement stmt = connection.createStatement();

@@ -9,7 +9,7 @@ public class Properties {
 
         static {
             try {
-                fileInputStream = new FileInputStream("C:\\Users\\Никита\\Desktop\\ProjectFull\\src\\main\\resources\\Mysql.properties");
+                fileInputStream = new FileInputStream("src/main/resources/Mysql.properties");
                 PROPERTIES = new java.util.Properties();
                 PROPERTIES.load(fileInputStream);
             } catch (IOException e) {

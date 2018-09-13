@@ -13,7 +13,7 @@ import java.net.*;
 class Connection_to_http extends Thread {
     private String name_coin;
     private String url;
-    protected static WhereSet whereSet= null;
+    protected static IWhereSet iwhereSetI = null;
 
     Connection_to_http(String name_coin) {
         this.name_coin = name_coin;
@@ -42,11 +42,11 @@ class Connection_to_http extends Thread {
                         JsonParser jsonParser = new JsonParser();
                         Object obj = jsonParser.parse(line);
                         JsonObject jsonObject = (JsonObject) obj;
-                        whereSet.get_info_for(jsonObject,name_coin);
+                        iwhereSetI.get_info_for(jsonObject,name_coin);
 
         }
 
-                    sleep(9000);
+                    sleep(7000);
                 }
 
             }
