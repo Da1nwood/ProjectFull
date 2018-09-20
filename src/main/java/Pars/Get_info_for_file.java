@@ -28,7 +28,6 @@ public class Get_info_for_file implements IWhereSet {
                 e.printStackTrace();
             } finally {
                 printWriter.close();
-
             }
         }
     }

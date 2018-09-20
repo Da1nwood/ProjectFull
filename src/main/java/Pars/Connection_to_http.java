@@ -46,7 +46,7 @@ class Connection_to_http extends Thread {
 
         }
 
-                    sleep(7000);
+                    sleep(10000);
                 }
 
             }
