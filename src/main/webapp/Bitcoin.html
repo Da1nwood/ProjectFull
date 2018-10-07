@@ -47,37 +47,53 @@
 <div class="raw size">
 <div class="col-sm-3 col-md-6">
 <div class="1">
+    <script src = "Go.js"></script>
+    <script>
+        socket= new WebSocket('ws://localhost:1488');
+        socket.onopen= function() {
+            alert("hello");
+        };
+        socket.onmessage= function(s) {
+            alert("lol"+s);
+        };
+    </script>
 <canvas id="myChart" width="200" height="200"></canvas>
+    <form><input type="button" value = "lol" onclick="add()"></form>
+
 <script>
 var ctx = document.getElementById("myChart");
 var chart = new Chart(ctx, {
- //    // The type of chart we want to create
- //    type: 'line',
 
- //    // The data for our dataset
- //    data: {
- //        labels: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
- //        datasets: [{
- //        label: "Bitcoin",
- //        fillColor: "rgba(220,220,220,0.5)",
- //        strokeColor: "rgba(220,220,220,0.8)",
- //        highlightFill: "rgba(220,220,220,0.75)",
- //        highlightStroke: "rgba(220,220,220,1)",
- //        showTooltip: false, //NEW OPTION DON"T NEED TO INCLUDE IT IF YOU WANT TO DISPLAY BUT WON"T HURT IF YOU DO
- //        data: [15, 10, 10, 10, 10, 10, 10]
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
+        datasets: [{
+        label: "Bitcoin",
+        fillColor: "rgba(220,220,220,0.5)",
+        strokeColor: "rgba(220,220,220,0.8)",
+        highlightFill: "rgba(220,220,220,0.75)",
+        highlightStroke: "rgba(220,220,220,1)",
+        showTooltip: false, //NEW OPTION DON"T NEED TO INCLUDE IT IF YOU WANT TO DISPLAY BUT WON"T HURT IF YOU DO
+        data: [0,1]
     
- //    }]
- //    },
-	// options: {
- //        scales: {
- //            yAxes: [{
- //                stacked: true
- //            }]
- //        }
- //    }	
- //    // Configuration options go here
- //   });
- 
+    }]
+    },
+	options: {
+        scales: {
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
+
+   });
+function add() {
+    chart.data.datasets[0].data = list;
+    chart.update();
+}
 </script>
 </div>
 </div>

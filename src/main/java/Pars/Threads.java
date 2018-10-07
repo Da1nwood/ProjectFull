@@ -6,13 +6,19 @@ class Threads {
     private static String name_coins[] = {"BTC", "LTC", "ETH"};
     private static Thread threads [] = new Thread[name_coins.length];
 
-    void start_parsing() {
+    void start_parsing_and_regression() {
+        try{
 
-        for (int i = 0; i < name_coins.length; i++) {
-            threads [i] = new Thread(name_coins[i]);
+            for (int i = 0; i < name_coins.length; i++) {
+                threads[i] = new Thread(name_coins[i]);
+            }
+            for (Thread currentThread : threads) {
+                new Connection_to_http(String.valueOf(currentThread.getName())).start();
+                new Regression(String.valueOf(currentThread.getName())).start();
+            }
         }
-        for (Thread currentThread : threads) {
-            new Connection_to_http(String.valueOf(currentThread.getName())).start();
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
     void start_sockets() throws Exception{

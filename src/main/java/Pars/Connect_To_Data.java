@@ -17,7 +17,7 @@ import java.sql.SQLException;
                      String name_coin = crypto_info.getName().toLowerCase();
                      String price = crypto_info.getPrice();
                      String TimeAdd = crypto_info.getTimestamp();
-                     System.out.println(price);
+//                     System.out.println(price);
                      String query = "INSERT INTO crypto." + name_coin + "(price, TimeAdd) VALUES (?,?)";
                      PreparedStatement stmt = connection.prepareStatement(query);
                      stmt.setString(1, price);
